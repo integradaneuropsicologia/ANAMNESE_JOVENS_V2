@@ -262,6 +262,19 @@
     line-height:1.4;
   }
 
+  .section-heading{
+    margin:10px 2px 0;
+    padding:10px 2px 2px;
+    border-top:1px solid var(--line);
+    color:#0f172a;
+    font-size:15px;
+    font-weight:700;
+  }
+
+  .profile-row{
+    background:#f8fafc;
+  }
+
   /* Responsividade */
   @media (max-width: 768px){
     body{
@@ -335,6 +348,79 @@
     const YESNO   = ["Sim","Não", "Não se aplica"];
     const YNP     = ["Sim","Não","Não sei", "Não se aplica"];
 
+    const SEX_OPTIONS = ["Feminino", "Masculino", "Outro", "Prefere não informar"];
+    const MARITAL_STATUS_OPTIONS = ["Solteiro(a)", "Casado(a)", "União estável", "Divorciado(a)", "Viúvo(a)", "Separado(a)", "Outro"];
+    const EDUCATION_OPTIONS = [
+      "Educação infantil",
+      "Ensino fundamental incompleto",
+      "Ensino fundamental completo",
+      "Ensino médio incompleto",
+      "Ensino médio completo",
+      "Ensino superior incompleto",
+      "Ensino superior completo",
+      "Pós-graduação",
+      "Mestrado",
+      "Doutorado",
+      "Não informado"
+    ];
+    const HANDEDNESS_OPTIONS = ["Destro(a)", "Canhoto(a)", "Ambidestro(a)", "Não informado"];
+    const BRAZILIAN_STATE_OPTIONS = [
+      "Acre",
+      "Alagoas",
+      "Amapá",
+      "Amazonas",
+      "Bahia",
+      "Ceará",
+      "Distrito Federal",
+      "Espírito Santo",
+      "Goiás",
+      "Maranhão",
+      "Mato Grosso",
+      "Mato Grosso do Sul",
+      "Minas Gerais",
+      "Pará",
+      "Paraíba",
+      "Paraná",
+      "Pernambuco",
+      "Piauí",
+      "Rio de Janeiro",
+      "Rio Grande do Norte",
+      "Rio Grande do Sul",
+      "Rondônia",
+      "Roraima",
+      "Santa Catarina",
+      "São Paulo",
+      "Sergipe",
+      "Tocantins"
+    ];
+
+    const PATIENT_PROFILE_QUESTIONS = [
+      { name: "perfil_nome", profileField: "nome", type: "text", section: "Dados cadastrais", text: "Nome completo", required: true },
+      { name: "perfil_whatsapp", profileField: "whatsapp", type: "tel", section: "Dados cadastrais", text: "WhatsApp", placeholder: "Ex.: +55 41 99999-0000", required: true },
+      { name: "perfil_whatsapp_alternativo", profileField: "whatsapp_alternativo", type: "tel", section: "Dados cadastrais", text: "WhatsApp alternativo", placeholder: "Opcional. Ex.: +55 41 99999-0000", required: false },
+      { name: "perfil_whatsapp_alternativo_recebe_mensagens", profileField: "whatsapp_alternativo_recebe_mensagens", type: "checkbox", section: "Dados cadastrais", text: "Mensagens no WhatsApp alternativo", checkboxText: "Também desejo receber mensagens neste WhatsApp alternativo.", required: false },
+      { name: "perfil_sexo", profileField: "sexo", type: "select", section: "Dados cadastrais", text: "Sexo", options: ["", ...SEX_OPTIONS], required: true },
+      { name: "perfil_data_nascimento", profileField: "data_nascimento", type: "date", section: "Dados cadastrais", text: "Data de nascimento", required: true },
+      { name: "perfil_naturalidade", profileField: "naturalidade", type: "select", section: "Dados cadastrais", text: "Naturalidade", options: ["", ...BRAZILIAN_STATE_OPTIONS], required: true },
+      { name: "perfil_estado_civil", profileField: "estado_civil", type: "select", section: "Dados cadastrais", text: "Estado civil", options: ["", ...MARITAL_STATUS_OPTIONS], required: true },
+      { name: "perfil_cep", profileField: "cep", type: "tel", section: "Endereço", text: "CEP", placeholder: "00000000", required: true },
+      { name: "perfil_logradouro", profileField: "logradouro", type: "text", section: "Endereço", text: "Rua/logradouro", required: true },
+      { name: "perfil_numero", profileField: "numero", type: "text", section: "Endereço", text: "Número", required: true },
+      { name: "perfil_bairro", profileField: "bairro", type: "text", section: "Endereço", text: "Bairro", required: true },
+      { name: "perfil_cidade", profileField: "cidade", type: "text", section: "Endereço", text: "Cidade", required: true },
+      { name: "perfil_complemento", profileField: "complemento", type: "text", section: "Endereço", text: "Complemento", placeholder: "Se não houver, informe Não se aplica", required: true },
+      { name: "perfil_email", profileField: "email", type: "email", section: "Contato e contexto", text: "E-mail", required: true },
+      { name: "perfil_escolaridade", profileField: "escolaridade", type: "select", section: "Contato e contexto", text: "Escolaridade", options: ["", ...EDUCATION_OPTIONS], required: true },
+      { name: "perfil_tipo_escola", profileField: "tipo_escola", type: "checkbox", section: "Contato e contexto", text: "Tipo de escola", options: ["Pública", "Particular"], required: true },
+      { name: "perfil_lateralidade", profileField: "lateralidade", type: "select", section: "Contato e contexto", text: "Lateralidade", options: ["", ...HANDEDNESS_OPTIONS], required: true },
+      { name: "perfil_nome_mae", profileField: "nome_mae", type: "text", section: "Filiação", text: "Nome da mãe", required: false },
+      { name: "perfil_nome_pai", profileField: "nome_pai", type: "text", section: "Filiação", text: "Nome do pai", required: false },
+      { name: "perfil_nota_fiscal_cpf", profileField: "nota_fiscal_cpf", type: "tel", section: "Nota fiscal e observações", text: "CPF da nota fiscal", required: true },
+      { name: "perfil_nota_fiscal_nome", profileField: "nota_fiscal_nome", type: "text", section: "Nota fiscal e observações", text: "Nome da nota fiscal", required: true },
+      { name: "perfil_observacoes", profileField: "observacoes", type: "textarea", section: "Nota fiscal e observações", text: "Observações", placeholder: "Se não houver observações, informe Não se aplica", required: true }
+    ];
+
+
 /**************************************************************
  * PONTUAÇÃO DAS ESCALAS
  * (null = não entra na soma)
@@ -373,7 +459,7 @@ const SCALE_SCORE_MAPS = {
     /**************************************************************
  * CONFIGURAÇÃO DAS PERGUNTAS (DINÂMICO)
  **************************************************************/
-const FORM_QUESTIONS = [
+const CLINICAL_FORM_QUESTIONS = [
   {
     name: "1",
     type: "checkbox",
@@ -1325,6 +1411,7 @@ const FORM_QUESTIONS = [
   }
 ];
 
+const FORM_QUESTIONS = [...PATIENT_PROFILE_QUESTIONS, ...CLINICAL_FORM_QUESTIONS];
 
 const INDICATORS_CONFIG = {};
 
@@ -1574,6 +1661,151 @@ function interpretByCutoffs(score, cutoffs) {
       return window.__patientFormAccessPromise;
     }
 
+    async function getPatientProfileByToken() {
+      const token = getTokenFromUrl();
+      const testCode = getTestCodeFromUrl();
+
+      if (!token || !testCode) {
+        return { data: null, error: new Error("Link invalido ou formulario nao informado.") };
+      }
+
+      if (window.__patientProfile && window.__patientProfile.form_code === testCode) {
+        return { data: window.__patientProfile, error: null };
+      }
+
+      if (!window.__patientProfilePromise) {
+        window.__patientProfilePromise = supabaseClient
+          .rpc("get_public_patient_profile_by_form_token", {
+            p_token: token,
+            p_form_code: testCode
+          })
+          .then(({ data, error }) => {
+            if (error) return { data: null, error };
+            const row = Array.isArray(data) ? data[0] : data;
+            window.__patientProfile = row || null;
+            return { data: row || null, error: null };
+          });
+      }
+
+      return window.__patientProfilePromise;
+    }
+
+    function ensureSelectOption(select, value) {
+      if (!select || value === null || value === undefined || value === "") return;
+      const exists = [...select.options].some(option => String(option.value) === String(value));
+      if (exists) return;
+      const option = document.createElement("option");
+      option.value = value;
+      option.textContent = value;
+      select.appendChild(option);
+    }
+
+    function setFormFieldValue(name, value) {
+      const controls = [...document.querySelectorAll(`[name="${CSS.escape(name)}"]`)];
+      if (!controls.length) return;
+
+      const first = controls[0];
+
+      if (first.type === "checkbox") {
+        if (controls.length === 1) {
+          first.checked = Boolean(value);
+          return;
+        }
+
+        const values = Array.isArray(value) ? value.map(String) : [String(value || "")];
+        controls.forEach(control => {
+          control.checked = values.includes(String(control.value));
+        });
+        return;
+      }
+
+      if (first.type === "radio") {
+        controls.forEach(control => {
+          control.checked = String(control.value) === String(value || "");
+        });
+        return;
+      }
+
+      if (first.tagName === "SELECT") {
+        ensureSelectOption(first, value);
+      }
+
+      first.value = value ?? "";
+    }
+
+    function applyPatientProfileToForm(profile) {
+      if (!profile) return;
+
+      const schoolTypes = [];
+      if (profile.escola_publica) schoolTypes.push("Pública");
+      if (profile.escola_particular) schoolTypes.push("Particular");
+
+      const values = {
+        perfil_nome: profile.nome || "",
+        perfil_whatsapp: profile.whatsapp || "",
+        perfil_whatsapp_alternativo: profile.whatsapp_alternativo || "",
+        perfil_whatsapp_alternativo_recebe_mensagens:
+          Boolean(profile.whatsapp_alternativo_recebe_mensagens),
+        perfil_sexo: profile.sexo || "",
+        perfil_data_nascimento: String(profile.data_nascimento || "").slice(0, 10),
+        perfil_naturalidade: profile.naturalidade || "",
+        perfil_estado_civil: profile.estado_civil || "",
+        perfil_cep: profile.cep || "",
+        perfil_logradouro: profile.logradouro || "",
+        perfil_numero: profile.numero || "",
+        perfil_bairro: profile.bairro || "",
+        perfil_cidade: profile.cidade || "",
+        perfil_complemento: profile.complemento || "",
+        perfil_email: profile.email || "",
+        perfil_escolaridade: profile.escolaridade || "",
+        perfil_tipo_escola: schoolTypes,
+        perfil_lateralidade: profile.lateralidade || "",
+        perfil_nome_mae: profile.nome_mae || "",
+        perfil_nome_pai: profile.nome_pai || "",
+        perfil_nota_fiscal_cpf: profile.nota_fiscal_cpf || "",
+        perfil_nota_fiscal_nome: profile.nota_fiscal_nome || "",
+        perfil_observacoes: profile.observacoes || ""
+      };
+
+      Object.entries(values).forEach(([name, value]) => setFormFieldValue(name, value));
+    }
+
+    function buildPatientProfilePayload(rawPayload) {
+      const schoolTypes = Array.isArray(rawPayload.perfil_tipo_escola)
+        ? rawPayload.perfil_tipo_escola
+        : rawPayload.perfil_tipo_escola
+          ? [rawPayload.perfil_tipo_escola]
+          : [];
+
+      return {
+        p_nome: rawPayload.perfil_nome || null,
+        p_email: rawPayload.perfil_email || null,
+        p_whatsapp: rawPayload.perfil_whatsapp || null,
+        p_whatsapp_alternativo: rawPayload.perfil_whatsapp_alternativo || null,
+        p_whatsapp_alternativo_recebe_mensagens:
+          Boolean(rawPayload.perfil_whatsapp_alternativo_recebe_mensagens),
+        p_sexo: rawPayload.perfil_sexo || null,
+        p_data_nascimento: rawPayload.perfil_data_nascimento || null,
+        p_naturalidade: rawPayload.perfil_naturalidade || null,
+        p_estado_civil: rawPayload.perfil_estado_civil || null,
+        p_cep: rawPayload.perfil_cep || null,
+        p_logradouro: rawPayload.perfil_logradouro || null,
+        p_numero: rawPayload.perfil_numero || null,
+        p_bairro: rawPayload.perfil_bairro || null,
+        p_cidade: rawPayload.perfil_cidade || null,
+        p_complemento: rawPayload.perfil_complemento || null,
+        p_escolaridade: rawPayload.perfil_escolaridade || null,
+        p_escola_publica: schoolTypes.includes("Pública"),
+        p_escola_particular: schoolTypes.includes("Particular"),
+        p_lateralidade: rawPayload.perfil_lateralidade || null,
+        p_nome_mae: rawPayload.perfil_nome_mae || null,
+        p_nome_pai: rawPayload.perfil_nome_pai || null,
+        p_nota_fiscal_cpf: rawPayload.perfil_nota_fiscal_cpf || null,
+        p_nota_fiscal_nome: rawPayload.perfil_nota_fiscal_nome || null,
+        p_observacoes: rawPayload.perfil_observacoes || null
+      };
+    }
+
     function installPatientTokenAccessShim() {
       if (!supabaseClient || supabaseClient.__patientTokenAccessShim) return;
 
@@ -1640,11 +1872,7 @@ function interpretByCutoffs(score, cutoffs) {
 
       setStatus("Consultando liberação do teste...", "loading");
 
-      const { data, error } = await supabaseClient
-        .from("patients")
-        .select("cpf, tests_liberados, tests_feitos")
-        .eq("cpf", cpf)
-        .maybeSingle();
+      const { data, error } = await getPatientFormAccessByToken();
 
       if (error) {
         console.error(error);
@@ -1671,6 +1899,16 @@ function interpretByCutoffs(score, cutoffs) {
         setTimeout(() => redirectToAreaPaciente(cpf), 700);
         return;
       }
+
+      const { data: profile, error: profileError } = await getPatientProfileByToken();
+
+      if (profileError) {
+        console.error(profileError);
+        setStatus("Erro ao carregar dados cadastrais.", "err");
+        return;
+      }
+
+      applyPatientProfileToForm(profile);
 
       // Se chegou aqui, pode abrir o formulário
       setStatus("Teste liberado. Formulário disponível.", "ok");
@@ -1715,13 +1953,23 @@ function renderDynamicForm(questions = []) {
   const form = $("testForm");
   form.innerHTML = "";
   form.noValidate = true;
+  let lastSection = "";
 
   questions.forEach((q, index) => {
+    if (q.section && q.section !== lastSection) {
+      const section = document.createElement("div");
+      section.className = "section-heading";
+      section.textContent = q.section;
+      form.appendChild(section);
+      lastSection = q.section;
+    }
+
     const row = document.createElement("div");
-    row.className = "row";
+    row.className = q.profileField ? "row profile-row" : "row";
 
     const fieldName = getFieldName(q, index);
     row.dataset.field = fieldName; 
+    if (q.profileField) row.dataset.profileField = q.profileField;
     const fieldId = `field_${fieldName}_${index}`;
 
     const label = document.createElement("label");
@@ -1772,7 +2020,7 @@ function renderDynamicForm(questions = []) {
         const opt = normalizeOption(optRaw);
         const optionEl = document.createElement("option");
         optionEl.value = opt.value;
-        optionEl.textContent = opt.label;
+        optionEl.textContent = opt.value === "" ? "Selecione" : opt.label;
         select.appendChild(optionEl);
       });
 
@@ -2218,6 +2466,67 @@ function scrollToRow(row){
     document.body.scrollTop = y;
   }, 80);
 }
+
+function onlyDigits(value = "") {
+  return String(value || "").replace(/\D/g, "");
+}
+
+function normalizeWhatsAppForDelivery(value = "") {
+  const rawValue = String(value || "").trim();
+  const digits = onlyDigits(rawValue);
+
+  if (!digits) return "";
+  if (rawValue.startsWith("+")) return digits;
+  if (digits.startsWith("00") && digits.length > 2) return digits.slice(2);
+  if (digits.startsWith("55")) return digits;
+  if (digits.length === 10 || digits.length === 11) return `55${digits}`;
+
+  return digits;
+}
+
+function getWhatsAppValidationError(value, required = false) {
+  const rawValue = String(value || "").trim();
+  const digits = onlyDigits(rawValue);
+  const deliveryPhone = normalizeWhatsAppForDelivery(rawValue);
+
+  if (!rawValue) return required ? "Informe o WhatsApp." : "";
+  if (/[A-Za-z]/.test(rawValue)) {
+    return "Use somente números, DDI, DDD e sinais como +, espaço ou parênteses.";
+  }
+  if (!digits) return "Informe um número de WhatsApp válido.";
+  if (deliveryPhone.length < 10 || deliveryPhone.length > 15) {
+    return "Informe o WhatsApp com DDI e DDD. Ex.: +55 41 99999-0000.";
+  }
+  if (deliveryPhone.startsWith("0")) {
+    return "Informe o número em formato internacional, sem zero inicial. Ex.: +55 41 99999-0000.";
+  }
+  if (/^(\d)\1+$/.test(deliveryPhone)) {
+    return "Informe um número de WhatsApp válido.";
+  }
+
+  return "";
+}
+
+function setCustomFieldValidity(formEl, fieldName, message) {
+  const field = formEl.querySelector(`[name="${CSS.escape(fieldName)}"]`);
+  if (!field || typeof field.setCustomValidity !== "function") return;
+  field.setCustomValidity(message || "");
+}
+
+function validateWhatsAppFields(formEl) {
+  const whatsapp = formEl.querySelector('[name="perfil_whatsapp"]');
+  const altWhatsapp = formEl.querySelector('[name="perfil_whatsapp_alternativo"]');
+  const altReceives = formEl.querySelector('[name="perfil_whatsapp_alternativo_recebe_mensagens"]');
+
+  const whatsappError = getWhatsAppValidationError(whatsapp?.value || "", true);
+  const altRequired = Boolean(altReceives?.checked);
+  const altError = getWhatsAppValidationError(altWhatsapp?.value || "", altRequired);
+
+  setCustomFieldValidity(formEl, "perfil_whatsapp", whatsappError);
+  setCustomFieldValidity(formEl, "perfil_whatsapp_alternativo", altError);
+
+  return !whatsappError && !altError;
+}
     /**************************************************************
      * ENVIO DO FORMULÁRIO (EXEMPLO)
      * Aqui você coloca seu save real.
@@ -2229,6 +2538,7 @@ function scrollToRow(row){
 
   // 1) validação antes de “enviar”
   clearInvalidUI(formEl);
+  validateWhatsAppFields(formEl);
 
   // (opcional) validações nativas (email, pattern etc.)
  if (!formEl.checkValidity()) {
@@ -2262,11 +2572,9 @@ function scrollToRow(row){
   btn.textContent = "Enviando...";
 
   try {
-    const cpf = getCpfFromUrl();
     const token = getTokenFromUrl();
     installPatientTokenAccessShim();
     const testCode = getTestCodeFromUrl();
-    const submittedAt = new Date().toISOString();
 
     // seu helper que preserva checkbox múltiplo
     const rawPayload = formDataToObject(e.target);
@@ -2290,12 +2598,8 @@ const resultsMetaPayload = Object.fromEntries(
   })
 );
 
-    // 1) Revalida no patients (não confiar só na validação inicial)
-    const { data: patient, error: patientError } = await supabaseClient
-      .from("patients")
-      .select("cpf, tests_liberados, tests_feitos")
-      .eq("cpf", cpf)
-      .maybeSingle();
+    // 1) Revalida por token (não confiar só na validação inicial)
+    const { data: patient, error: patientError } = await getPatientFormAccessByToken();
 
     if (patientError) {
       console.error(patientError);
@@ -2314,21 +2618,38 @@ const resultsMetaPayload = Object.fromEntries(
     const jaFeito = isTestFeito(patient.tests_feitos, testCode);
     if (jaFeito) {
       // já feito -> volta pra área do paciente
-      redirectToAreaPaciente(cpf);
+      redirectToAreaPaciente();
       return;
     }
 
-   const { error: insertError } = await supabaseClient
-  .from("respostas")
-  .insert([
-    {
-      cpf: cpf,
-      code: testCode,
-      submitted_at: submittedAt,
-      results: resultsPayload,          // array puro pergunta/resposta
-      results_meta: resultsMetaPayload  // bruto + pontuação
+    const profilePayload = buildPatientProfilePayload(rawPayload);
+
+    const { error: profileUpdateError } = await supabaseClient.rpc(
+      "submit_public_patient_profile_by_form_token",
+      {
+        p_token: token,
+        p_form_code: testCode,
+        ...profilePayload
+      }
+    );
+
+    if (profileUpdateError) {
+      console.error("ERRO UPDATE perfil:", profileUpdateError);
+      throw new Error(
+        `Erro ao atualizar dados cadastrais: ${profileUpdateError.message || ""}`.trim()
+      );
     }
-  ]);
+
+   const { error: insertError } = await supabaseClient.rpc(
+    "submit_public_patient_form_response",
+    {
+      p_token: token,
+      p_form_code: testCode,
+      p_form_name: "Anamnese Jovens",
+      p_results: resultsPayload,
+      p_results_meta: resultsMetaPayload
+    }
+  );
 
    if (insertError) {
   console.error("ERRO INSERT respostas:", insertError);
@@ -2337,26 +2658,11 @@ const resultsMetaPayload = Object.fromEntries(
   );
 }
 
-    // 3) Atualiza tests_feitos no patients (JSONB)
-    const nextTestsFeitos = buildUpdatedTestsFeitos(patient.tests_feitos, testCode, submittedAt);
-
-    const { error: updateError } = await supabaseClient
-      .from("patients")
-      .update({
-        tests_feitos: nextTestsFeitos
-      })
-      .eq("cpf", cpf);
-
-    if (updateError) {
-      console.error(updateError);
-      throw new Error("Resposta salva, mas falhou ao marcar teste como feito.");
-    }
-
-    // 4) Sucesso
+    // 3) Sucesso
     setStatus("Respostas enviadas com sucesso. Redirecionando...", "ok");
 
     setTimeout(() => {
-      redirectToAreaPaciente(cpf);
+      redirectToAreaPaciente();
     }, 700);
 
   } catch (err) {
@@ -2375,6 +2681,8 @@ function setupLiveInvalidCleanup(questions){
   const formEl = $("testForm");
 
   const handler = (e) => {
+    validateWhatsAppFields(formEl);
+
     const row = e.target.closest(".row");
     if (!row) return;
 
