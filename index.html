@@ -190,6 +190,12 @@
     box-shadow:0 0 0 3px rgba(59,130,246,.14);
   }
 
+  .field-control[readonly]{
+    background:#f1f5f9;
+    color:#475569;
+    cursor:not-allowed;
+  }
+
   textarea{
     min-height:100px;
     resize:vertical;
@@ -1733,6 +1739,18 @@ function interpretByCutoffs(score, cutoffs) {
       first.value = value ?? "";
     }
 
+    function lockPatientIdentityField(name, value) {
+      if (!String(value || "").trim()) return;
+
+      const control = document.querySelector(`[name="${CSS.escape(name)}"]`);
+      if (!control) return;
+
+      control.readOnly = true;
+      control.setAttribute("aria-readonly", "true");
+      control.setAttribute("autocomplete", "off");
+      control.title = "Dado de identidade confirmado no cadastro da clinica.";
+    }
+
     function applyPatientProfileToForm(profile) {
       if (!profile) return;
 
@@ -1768,6 +1786,23 @@ function interpretByCutoffs(score, cutoffs) {
       };
 
       Object.entries(values).forEach(([name, value]) => setFormFieldValue(name, value));
+      lockPatientIdentityField("perfil_nome", profile.nome);
+      lockPatientIdentityField("perfil_data_nascimento", profile.data_nascimento);
+    }
+
+    function preserveCanonicalPatientIdentity(rawPayload) {
+      const profile = window.__patientProfile;
+      if (!profile) return rawPayload;
+
+      if (String(profile.nome || "").trim()) {
+        rawPayload.perfil_nome = profile.nome;
+      }
+
+      if (String(profile.data_nascimento || "").trim()) {
+        rawPayload.perfil_data_nascimento = String(profile.data_nascimento).slice(0, 10);
+      }
+
+      return rawPayload;
     }
 
     function buildPatientProfilePayload(rawPayload) {
@@ -2577,7 +2612,7 @@ function validateWhatsAppFields(formEl) {
     const testCode = getTestCodeFromUrl();
 
     // seu helper que preserva checkbox múltiplo
-    const rawPayload = formDataToObject(e.target);
+    const rawPayload = preserveCanonicalPatientIdentity(formDataToObject(e.target));
 
 // respostas legíveis (vai para "results")
 const respostasLegiveis = buildResultsPerguntasRespostas(FORM_QUESTIONS, rawPayload);
